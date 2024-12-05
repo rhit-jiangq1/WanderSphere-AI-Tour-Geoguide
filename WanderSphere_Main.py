@@ -76,8 +76,10 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions 
-import requests
+from datetime import datetime
 import time
+import os 
+import requests
 from bs4 import BeautifulSoup  
 import pandas as pd
 from selenium import webdriver
@@ -91,10 +93,7 @@ from openpyxl.styles import Font
 from openpyxl.styles import PatternFill
 from openpyxl.styles.borders import Border, Side, BORDER_THIN
 from openpyxl.styles import Alignment 
-import os 
 import pandas as pd
-from datetime import datetime
-# from selenium.webdriver.common.window import WindowType
 
 
 def getSearch_Data(page_url):
@@ -106,6 +105,8 @@ def getSearch_Data(page_url):
     my_data_dict = {}
     places_data = {}
     user_reviews_tmp = []
+    places_data_list = []
+    
     my_data_dict["place_Name"] = []
     my_data_dict["user_reviews"] = []
     my_data_dict["place_location"] = ""
@@ -207,7 +208,7 @@ def getSearch_Data(page_url):
     pagecheck=False
     while pagecheck!=True:
         try: 
-            for i in range(1,11): 
+            for i in range(1,3): 
                 
                 xpath =  '//*[@class="entity-listing-container"]/div/ul/li[' + str(i) + ']'
                 top_15_search_results = driver.find_element(By.XPATH,xpath)
@@ -217,8 +218,7 @@ def getSearch_Data(page_url):
                     time.sleep(3)
                     
                     try:
-                        
-                                            
+                                  
                         ################################################################################
                         
                         ### place name xpath
@@ -234,29 +234,57 @@ def getSearch_Data(page_url):
                         
                         print(place_Name)
                         print('============== Running for the ' , i , ' search: ' , place_Name , ' location now ================')                        
-                         
-                        
-                        
-                         
+                          
                         
                         ################################################################################
                         """
                         ##### Collect reviews of user to perform the sentiment analysis and check the positive and negative comments 
                         """
                         print('COllect user reviews in list ')
+                        
                         ###### Error handling as the reviews are not present on all location 
-                        try:
-                            xpath_user_reviews = '//*[contains(@class,"b_reviewText")]//div[2]/span'
-                            element = driver.find_element(By.XPATH,xpath_user_reviews)
-                            for elem in element:
-                                user_reviews_tmp = []
-                                val = elem.get_attribute('text')
-                                user_reviews_tmp.append(val)
-                            print('user_reviews_tmp: ' , user_reviews_tmp)
-                        except: pass 
+                        # try:
+                        xpath_user_reviews = '(//*[contains(@class,"b_reviewText")]//div[2]/span[1])'
+                        ####  '//*[contains(@class,"b_reviewText")]//div[2]/span'
+                        element = driver.find_element(By.XPATH,xpath_user_reviews)
                         
+                        print(' ')
+                        print(' ') 
+                        print(' ') 
+                        print(' ') 
+                        print(' ') 
                         
+                        user_reviews_tmp = []
+                        element = ''
+                        for i in range(1,10):
+                            try:
+                                element = ''
+                                xpath_user_reviews = '(//*[contains(@class,"b_reviewText")]//div[2]/span[1])[' + str(i) + ']'
+                                element = driver.find_element(By.XPATH,xpath_user_reviews).text
+                                print(i , ' - element ------', element)
+                                user_reviews_tmp.append(element)
+                            except:pass
+                             
+                            
+                        print('user_reviews_tmp: ' , user_reviews_tmp)
+                          
+                        
+                        print(' ')
+                        print(' ') 
+                        print(' ') 
+                        print(' ') 
+                        print(' ') 
                          
+                        
+                        """
+                        # Add the key "user_reviews" and assign the value from the variable
+                        """  
+                        print('adding the value in dict')
+                        my_data_dict["user_reviews"] = list(user_reviews_tmp)   # Join list of reviews into a single string
+                        ########user_reviews_tmp
+                        print('value added in dictionary')
+                             
+                        # except: pass 
                          
                         ################################################################################
                         print('code to get the location title ')
@@ -290,8 +318,43 @@ def getSearch_Data(page_url):
 
                         print('img_path_of_location: ', img_path_of_location)
                     except:pass
+                     
+                     
                 
-                
+                    # try:
+                    print('   place_Name : ',place_Name )
+                    print('  place_location  : ', place_location)
+                    print('   ratings : ',ratings )
+                    print('  img_path_of_location  : ', img_path_of_location)
+                    
+                    
+                    """
+                    ##### Add the key "place_name" and assign the value from the variable
+                    """
+                    my_data_dict["place_Name"] = place_Name
+                    """
+                    # Add the key "place_location" and assign the value from the variable
+                    """
+                        
+                    my_data_dict["place_location"] = place_location
+                        
+                    """
+                    # Add the key "ratings" and assign the value from the variable
+                    """
+                    my_data_dict["ratings"] = ratings 
+                    """
+                    # Add the key "img_path_of_location" and assign the value from the variable
+                    """
+                    my_data_dict["img_path_of_location"] = img_path_of_location 
+                    """ 
+                    ### Add the key "img_path_of_location" and assign the value from the variable
+                    """ 
+                    
+                                        
+                    ################################################################################     
+                    #### print my_data_dict dictionary
+                    print(my_data_dict)
+                    
                     
                     print("-------- query_search_ for top 10 results found----------")
                     
@@ -397,66 +460,64 @@ def getSearch_Data(page_url):
                     except:pass
                      
                     
-                    ################################################################################
-                    
-                    # try:
-                    print('  user_reviews_tmp  : ', user_reviews_tmp)
-                    print('   place_Name : ',place_Name )
-                    print('  place_location  : ', place_location)
-                    print('   ratings : ',ratings )
-                    print('  img_path_of_location  : ', img_path_of_location)
                     print('   wikipedia_result : ', wikipedia_result)
-                    
-                    """
-                    # Add the key "user_reviews" and assign the value from the variable
-                    """  
-                    print('adding the value in dict')
-                    my_data_dict["user_reviews"] = user_reviews_tmp
-                    print('value added in dictionary')
-                    
-                    """
-                    ##### Add the key "place_name" and assign the value from the variable
-                    """
-                    my_data_dict["place_Name"] = place_Name
-                    """
-                    # Add the key "place_location" and assign the value from the variable
-                    """
-                        
-                    my_data_dict["place_location"] = place_location
-                        
-                    """
-                    # Add the key "ratings" and assign the value from the variable
-                    """
-                    my_data_dict["ratings"] = ratings 
-                    """
-                    # Add the key "img_path_of_location" and assign the value from the variable
-                    """
-                    my_data_dict["img_path_of_location"] = img_path_of_location 
-                    """ 
-                    ### Add the key "img_path_of_location" and assign the value from the variable
-                    """ 
                     my_data_dict["wikipedia_result"] = wikipedia_result
                 
-                                        
-                    ################################################################################     
-                    #### print my_data_dict dictionary
-                    print(my_data_dict)
                     
+                    ################################################################################
+                    
+                    # Convert my_data_dict to a format suitable for pandas
+                    place_data = {
+                        'Place Name': my_data_dict["place_Name"],
+                        'User Reviews': ", ".join(my_data_dict["user_reviews"]),  # Join list of reviews into a single string
+                        'Place Location': my_data_dict["place_location"],
+                        'User Ratings': my_data_dict["ratings"],
+                        'Image Path': my_data_dict["img_path_of_location"],
+                        'Wikipedia Information': my_data_dict["wikipedia_result"]
+                    }
+                    
+                    # Append the place data to the list
+                    places_data_list.append(place_data)
+                    
+                    # Now convert the list of dictionaries into a DataFrame
+                    df = pd.DataFrame(places_data_list)
+                    
+                    # Print the DataFrame to check
+                    print(df)
                         
                     # ################################################################################
                     
-                    # Create a dictionary to store the data for the place
-                    places_data = {
-                        my_data_dict["place_Name"]: {
-                            "user_reviews": my_data_dict["user_reviews"],
-                            "place_location": my_data_dict["place_location"],
-                            "ratings": my_data_dict["ratings"],
-                            "img_path_of_location": my_data_dict["img_path_of_location"],
-                            "wikipedia_result": my_data_dict["wikipedia_result"]
-                        }
-                    }
+                    # # Create a dictionary to store the data for the place
+                    # places_data = {
+                    #     my_data_dict["place_Name"]: {
+                    #         "user_reviews": my_data_dict["user_reviews"],
+                    #         "place_location": my_data_dict["place_location"],
+                    #         "ratings": my_data_dict["ratings"],
+                    #         "img_path_of_location": my_data_dict["img_path_of_location"],
+                    #         "wikipedia_result": my_data_dict["wikipedia_result"]
+                    #     }
+                    # }
                     
-                    print('places_data', places_data)
+                    # print('places_data', places_data)
+                     
+                    # ################################################################################
+                    # # Print the dictionary to confirm its content
+                    # print("Dictionary Data:")
+                    # print(places_data)
+                    
+                    # """
+                    # # Convert the dictionary into a DataFrame for saving as Excel
+                    # # Convert the nested dictionary to a format that pandas can handle
+                    # """
+                    
+                    # df = pd.DataFrame({
+                    #     'Place Name': [my_data_dict["place_Name"]],
+                    #     'User Reviews': [", ".join(my_data_dict["user_reviews"])],  # Join list of reviews into a single string
+                    #     'Place Location': [my_data_dict["place_location"]],
+                    #     'User Ratings': [my_data_dict["ratings"]],
+                    #     'Image Path': [my_data_dict["img_path_of_location"]],
+                    #     'Wikipedia Information': [my_data_dict["wikipedia_result"]]
+                    # })
                     
                     # except:pass 
                     
@@ -563,59 +624,40 @@ def getSearch_Data(page_url):
     
     time.sleep(2)   
 
-    
-    # ################################################################################
-    # # Print the dictionary to confirm its content
-    # print("Dictionary Data:")
-    # print(places_data)
-    
-    # """
-    # # Convert the dictionary into a DataFrame for saving as Excel
-    # # Convert the nested dictionary to a format that pandas can handle
-    # """
-    
-    # df = pd.DataFrame({
-    #     'Place Name': [my_data_dict["place_Name"]],
-    #     'User Reviews': [", ".join(my_data_dict["user_reviews"])],  # Join list of reviews into a single string
-    #     'Place Location': [my_data_dict["place_location"]],
-    #     'User Ratings': [my_data_dict["ratings"]],
-    #     'Image Path': [my_data_dict["img_path_of_location"]],
-    #     'Wikipedia Information': [my_data_dict["wikipedia_result"]]
-    # })
-    
+   
 
-    # ################################################################################
-    # # Get the current date and time for the file name
-    # current_datetime = datetime.now().strftime("%Y-%m-%d")
+    ################################################################################
+    # Get the current date and time for the file name
+    current_datetime = datetime.now().strftime("%Y-%m-%d")
     
-    # # Define the file name with the current date and time
-    # file_name = f"wandersphere_result_{current_datetime}.xlsx"
+    # Define the file name with the current date and time
+    file_name = f"wandersphere_result_{current_datetime}.xlsx"
     
-    # ########## Save the DataFrame to an Excel file  ##########
+    ########## Save the DataFrame to an Excel file  ##########
     
-    # # Check if the Excel file already exists
-    # if os.path.exists(file_name):
-    #     # If the file exists, load the existing data
-    #     with pd.ExcelWriter(file_name, engine='openpyxl', mode='a', if_sheet_exists='overlay') as writer:
-    #         # Read the existing content of the file
-    #         existing_df = pd.read_excel(file_name, sheet_name='Sheet1')
+    # Check if the Excel file already exists
+    if os.path.exists(file_name):
+        # If the file exists, load the existing data
+        with pd.ExcelWriter(file_name, engine='openpyxl', mode='a', if_sheet_exists='overlay') as writer:
+            # Read the existing content of the file
+            existing_df = pd.read_excel(file_name, sheet_name='Sheet1')
     
-    #         # Append the new data (the new data is always in `df`)
-    #         updated_df = pd.concat([existing_df, df], ignore_index=True)
+            # Append the new data (the new data is always in `df`)
+            updated_df = pd.concat([existing_df, df], ignore_index=True)
     
-    #         # Save the updated data back to the same sheet
-    #         updated_df.to_excel(writer, index=False, sheet_name='Sheet1')
+            # Save the updated data back to the same sheet
+            updated_df.to_excel(writer, index=False, sheet_name='Sheet1')
     
-    #     print(f"Data has been appended to the existing file: {file_name}")
+        print(f"Data has been appended to the existing file: {file_name}")
         
-    # else:
-    #     # If the file does not exist, create a new file and save the data
-    #     df.to_excel(file_name, index=False, sheet_name='Sheet1')
-    #     print(f"Data has been saved to a new file: {file_name}")
+    else:
+        # If the file does not exist, create a new file and save the data
+        df.to_excel(file_name, index=False, sheet_name='Sheet1')
+        print(f"Data has been saved to a new file: {file_name}")
     
     
-    # ################################################################################
-    # print(f"Data has been saved to {file_name}")
+    ################################################################################
+    print(f"Data has been saved to {file_name}")
     
     
     
