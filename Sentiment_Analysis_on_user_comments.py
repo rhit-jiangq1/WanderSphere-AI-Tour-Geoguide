@@ -45,7 +45,6 @@ Created on Thu Dec  5 16:27:49 2024
 
 """
 
-
 ##############    Sentiment Analysis using VADER (Valence Aware Dictionary and sEntiment Reasoner):  ##############
 def SA_VADER(comments):
     """
@@ -127,7 +126,6 @@ def SA_BERT(comments):
 
     # Load pre-trained sentiment analysis pipeline from Hugging Face
     classifier = pipeline("sentiment-analysis")
-    
 
     # Initialize counters for sentiment
     positive_count = 0
@@ -199,24 +197,18 @@ def SA_TextBlob(comments):
 
 
  
-comments =  [
-    'We did the Rockefeller Center architecture tour. The key to this tour is to have a great guide, and Jonathan was that guide. It was a wonderful, informative, and educational tour. Jonathan really knew his stuff!',
-    'We had the pleasure of a VIP experience led by Karmilla! The NYC skyline at night was absolutely beautiful, and the panoramic views from the Sky Lift were truly unbeatable.',
-    'We visited The Top of The Rock about an hour before sunset and then took in the views whilst the sun went down. It was pretty busy and difficult to get some space but everyone was polite in taking turns for the best photos.'
-]
-
-# ['not very good locaition to travel alone',
-#              'looks shady in night',
-#              'gloomy weather in december']
+comments =  ['not very good locaition to travel alone',
+             'looks shady in night',
+             'gloomy weather in december']
 #  
 
-print(' ')
-print(' SA_BERT model ')
-SA_BERT(comments)
+# print(' ')
+# print(' SA_BERT model ')
+# SA_BERT(comments)
 
-print(' ')
-print(' SA_VADER model ')
-SA_VADER(comments)
+# print(' ')
+# print(' SA_VADER model ')
+# SA_VADER(comments)
 
 print(' ')
 print(' SA_TextBlob model ')
