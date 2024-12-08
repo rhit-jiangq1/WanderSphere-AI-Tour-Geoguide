@@ -99,4 +99,4 @@ df_results = pd.DataFrame({
 # Output the results to a CSV file
 df_results.to_csv('sentiment_analysis_results.csv', index=False)
 
-print("Sentiment analysis complete. Results saved to 'sentiment_analysis_results.csv'.")
+print("Sentiment analysis is completed. Results will be saved to 'sentiment_analysis_results.csv'.")
