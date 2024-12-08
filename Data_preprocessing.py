@@ -3,7 +3,7 @@
 """
 Created on Sat Dec  7 12:00:00 2024
 
-@author: komalwavhal
+@author: Hemanth Bathini
 """
 
 import pandas as pd
@@ -14,35 +14,25 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from textblob import TextBlob
 from transformers import pipeline
 
-# Download NLTK stopwords (if needed)
 import nltk
 nltk.download('stopwords')
 nltk.download('punkt')
 
-# Function to clean and preprocess text
 def preprocess_text(text):
-    """
-    Clean and preprocess the given text:
-    - Convert to lowercase
-    - Remove URLs, special characters, and numbers
-    - Tokenize and remove stop words
-    """
+
     if not text:
         return ""
-    # Convert to lowercase
     text = text.lower()
-    # Remove URLs
+    # Removing URLs
     text = re.sub(r"http\S+|www\S+|https\S+", '', text, flags=re.MULTILINE)
-    # Remove special characters and numbers
+    # Removing special characters and numbers
     text = re.sub(r"[^a-z\s]", '', text)
-    # Tokenize
+    # Tokenizing
     tokens = word_tokenize(text)
-    # Remove stopwords
     stop_words = set(stopwords.words('english'))
     tokens = [word for word in tokens if word not in stop_words]
     return " ".join(tokens)
 
-# Function to perform sentiment analysis with VADER
 def analyze_sentiment_vader(comments):
     analyzer = SentimentIntensityAnalyzer()
     results = []
@@ -56,7 +46,6 @@ def analyze_sentiment_vader(comments):
         results.append({'comment': comment, 'sentiment': sentiment, 'score': scores['compound']})
     return results
 
-# Function to perform sentiment analysis with TextBlob
 def analyze_sentiment_textblob(comments):
     results = []
     for comment in comments:
