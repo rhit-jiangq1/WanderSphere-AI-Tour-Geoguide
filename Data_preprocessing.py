@@ -58,7 +58,6 @@ def analyze_sentiment_textblob(comments):
         results.append({'comment': comment, 'sentiment': sentiment, 'score': blob.sentiment.polarity})
     return results
 
-# Function to perform sentiment analysis with BERT
 def analyze_sentiment_bert(comments):
     classifier = pipeline("sentiment-analysis")
     results = []
@@ -69,8 +68,7 @@ def analyze_sentiment_bert(comments):
         results.append({'comment': comment, 'sentiment': sentiment, 'score': result['score']})
     return results
 
-# Load and preprocess comments from your Flickr script
-# Assume `comments` is a list of user comments retrieved from Flickr
+
 comments = [
     "not very good location to travel alone",
     "looks shady at night",
@@ -79,15 +77,14 @@ comments = [
     "amazing place to visit with family!"
 ]
 
-# Preprocess the comments
 preprocessed_comments = [preprocess_text(comment) for comment in comments]
 
-# Perform sentiment analysis
+# Performing sentiment analysis
 vader_results = analyze_sentiment_vader(preprocessed_comments)
 textblob_results = analyze_sentiment_textblob(preprocessed_comments)
 bert_results = analyze_sentiment_bert(preprocessed_comments)
 
-# Combine results into a DataFrame
+# Combining results into a DataFrame
 df_results = pd.DataFrame({
     'Original Comment': comments,
     'Preprocessed Comment': preprocessed_comments,
