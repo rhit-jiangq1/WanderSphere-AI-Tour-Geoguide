@@ -13,7 +13,6 @@ def calculate_ranking_score(row):
     view_score = row['Views']
     tag_score = len(row['Tags'].split(','))
     sentiment_score = row['Sentiment Score']
-    # Equal weights for each parameter
     return view_score + tag_score + sentiment_score
 
 df['Ranking Score'] = df.apply(calculate_ranking_score, axis=1)
