@@ -268,8 +268,144 @@ class Page1(tk.Frame):
         lng_entry.config(state='disabled')
         
         
+    
+     ########################################################################################################
+
          
+            
+    # def update_dropdown_state_Natural_Attractions_selected(self):   
+    #     print('inside the Natural_Attractions_selected function: ')     
         
+        
+    # def update_dropdown_state_Wildlife_Nature_Experiences_selected(self):   
+    #     print('inside the Wildlife_Nature_Experiences_selected function: ')     
+        
+    # def update_dropdown_state_Urban_Modern_Attractions_selected(self):   
+    #     print('inside the Urban_Modern_Attractions_selected function: ')  
+        
+    # def Cultural_Historical_Attractions_selected(self):   
+    #     print('inside the Cultural_Historical_Attractions_selected function: ')     
+        
+        
+    # def update_dropdown_state_Adventure_Sports_Tourism_selected(self):   
+    #     print('inside the Adventure_Sports_Tourism_selected function: ')     
+
+
+
+    
+     ########################################################################################################
+
+        
+         
+            
+    def update_dropdown_state_Attractions_selected(self):   
+        print('inside the Natural_Attractions_dropdown_changed function: ')    
+        
+        if (self.Attractions_selected.get() == 1):
+            self.Natural_Attractions_dropdown_selected.config(state='normal')
+            self.Wildlife_Nature_Experiences_dropdown_selected.config(state='disabled') 
+            self.Cultural_Historical_Attractions_dropdown_selected.config(state='disabled')
+            self.Urban_Modern_dropdown_selected.config(state='disabled') 
+            self.Adventure_Sports_Tourism_dropdown_selected.config(state='disabled')  
+
+ 
+            self.Wildlife_Nature_Experiences_dropdown_selected.set('') 
+            self.Cultural_Historical_Attractions_dropdown_selected.set('') 
+            self.Urban_Modern_dropdown_selected.set('')  
+            self.Adventure_Sports_Tourism_dropdown_selected.set('') 
+
+ 
+        if (self.Attractions_selected.get() == 2):
+            self.Natural_Attractions_dropdown_selected.config(state='disabled')
+            self.Wildlife_Nature_Experiences_dropdown_selected.config(state='normal') 
+            self.Cultural_Historical_Attractions_dropdown_selected.config(state='disabled')
+            self.Urban_Modern_dropdown_selected.config(state='disabled') 
+            self.Adventure_Sports_Tourism_dropdown_selected.config(state='disabled')  
+            
+            self.Natural_Attractions_dropdown_selected.set('') 
+            self.Cultural_Historical_Attractions_dropdown_selected.set('') 
+            self.Urban_Modern_dropdown_selected.set('') 
+            self.Adventure_Sports_Tourism_dropdown_selected.set('') 
+            
+        if (self.Attractions_selected.get() == 3):
+            self.Natural_Attractions_dropdown_selected.config(state='disabled')
+            self.Wildlife_Nature_Experiences_dropdown_selected.config(state='disabled') 
+            self.Cultural_Historical_Attractions_dropdown_selected.config(state='normal')
+            self.Urban_Modern_dropdown_selected.config(state='disabled') 
+            self.Adventure_Sports_Tourism_dropdown_selected.config(state='disabled')  
+            
+            self.Natural_Attractions_dropdown_selected.set('') 
+            self.Wildlife_Nature_Experiences_dropdown_selected.set('') 
+            self.Cultural_Historical_Attractions_dropdown_selected.set('') 
+            self.Adventure_Sports_Tourism_dropdown_selected.set('') 
+            
+            
+    
+        if (self.Attractions_selected.get() == 4):
+            self.Natural_Attractions_dropdown_selected.config(state='disabled')
+            self.Wildlife_Nature_Experiences_dropdown_selected.config(state='disabled') 
+            self.Cultural_Historical_Attractions_dropdown_selected.config(state='disabled')
+            self.Urban_Modern_dropdown_selected.config(state='normal') 
+            self.Adventure_Sports_Tourism_dropdown_selected.config(state='disabled')  
+            
+            self.Natural_Attractions_dropdown_selected.set('') 
+            self.Wildlife_Nature_Experiences_dropdown_selected.set('') 
+            self.Cultural_Historical_Attractions_dropdown_selected.set('') 
+            self.Adventure_Sports_Tourism_dropdown_selected.set('') 
+            
+            
+        if (self.Attractions_selected.get() == 5):
+            self.Natural_Attractions_dropdown_selected.config(state='disabled')
+            self.Wildlife_Nature_Experiences_dropdown_selected.config(state='disabled') 
+            self.Cultural_Historical_Attractions_dropdown_selected.config(state='disabled')
+            self.Urban_Modern_dropdown_selected.config(state='disabled') 
+            self.Adventure_Sports_Tourism_dropdown_selected.config(state='normal')  
+            
+            
+            self.Natural_Attractions_dropdown_selected.set('') 
+            self.Wildlife_Nature_Experiences_dropdown_selected.set('')  
+            self.Cultural_Historical_Attractions_dropdown_selected.set('') 
+            self.Urban_Modern_dropdown_selected.set('')   
+              
+        
+           
+    
+    def Natural_Attractions_dropdown_changed(self,event):  
+        print('inside the Natural_Attractions_dropdown_changed function: ')     
+        print(self.Natural_Attractions_dropdown_selected.get())
+
+        # self.mainGetData_1 = str(self.Natural_Attractions_dropdown_selected[0])
+
+        
+    def Wildlife_Nature_Experiences_dropdown_changed(self,event): 
+        print('inside the Wildlife_Nature_Experiences_dropdown_changed function: ')     
+     
+        self.mainGetData_2 = str(self.Wildlife_Nature_Experiences_dropdown_selected.get())
+   
+        
+    def Cultural_Historical_Attractions_dropdown_changed(self,event):  
+        print('inside the Cultural_Historical_Attractions_dropdown_changed function: ')     
+     
+        self.mainGetData_3 = str(self.Cultural_Historical_Attractions_dropdown_selected.get())
+
+        
+    def Urban_Modern_Attractions_dropdown_changed(self,event):  
+        print('inside the Urban_Modern_Attractions_dropdown_changed function: ')       
+     
+        self.mainGetData_4 = str(self.Urban_Modern_dropdown_selected.get())
+ 
+        
+        
+    def Adventure_Sports_Tourism_dropdown_changed(self,event):
+        print('inside the Adventure_Sports_Tourism_dropdown_changed function: ')       
+     
+        self.mainGetData_5 = str(self.Adventure_Sports_Tourism_dropdown_selected.get())
+ 
+ 
+     ########################################################################################################
+
+
+
 
     def __init__(self, parent, controller):
          
@@ -398,7 +534,7 @@ class Page1(tk.Frame):
         
         self.lng_entry = tk.Entry(self)
          
-        self.lng_entry.place(x=910,y=230)    
+        self.lng_entry.place(x=910,y=235)    
          
         # Update city dropdown when country is selected
         self.country_combobox.bind("<<ComboboxSelected>>",  lambda event: self.update_city_dropdown(event, self.country_combobox.get(),  file_path, self.city_combobox, self.lat_entry, self.lng_entry))
@@ -418,6 +554,125 @@ class Page1(tk.Frame):
         self.v.set(100)  
         
         ###-----------------------------------------------------------------------------------------
+        
+         
+        
+             
+        ###------------------Select radio button -----------------------------------------------------------------------
+        
+    
+        self.Attractions_selected  = tk.IntVar()
+        # self.Natural_Attractions_selected  = tk.IntVar() 
+        self.Natural_Attractions = tk.Radiobutton(self,text='', value=1,variable = self.Attractions_selected,command=self.update_dropdown_state_Attractions_selected ,fg= 'green', bg = '#FFFFFF',font=('calibri',10,'bold') )
+        self.Natural_Attractions.place(x=1130,y=200)   
+        
+        # self.Wildlife_Nature_Experiences_selected  = tk.IntVar() 
+        self.Wildlife_Nature_Experiences = tk.Radiobutton(self,text='', value=2,variable = self.Attractions_selected,command=self.update_dropdown_state_Attractions_selected ,fg= 'green', bg = '#FFFFFF',font=('calibri',10,'bold') )
+        self.Wildlife_Nature_Experiences.place(x=1130,y=230)  
+        
+        # self.Cultural_Historical_Attractions_selected  = tk.IntVar() 
+        self.Cultural_Historical_Attractions = tk.Radiobutton(self,text='', value=3,variable = self.Attractions_selected,command=self.update_dropdown_state_Attractions_selected ,fg= 'green', bg = '#FFFFFF',font=('calibri',10,'bold') )
+        self.Cultural_Historical_Attractions.place(x=1130,y=260)  
+        
+        # self.Urban_Modern_Attractions_selected  = tk.IntVar() 
+        self.Urban_Modern_Attractions = tk.Radiobutton(self,text='', value=4,variable = self.Attractions_selected,command=self.update_dropdown_state_Attractions_selected ,fg= 'green', bg = '#FFFFFF',font=('calibri',10,'bold') )
+        self.Urban_Modern_Attractions.place(x=1130,y=290)
+        
+        # self.Adventure_Sports_Tourism_selected  = tk.IntVar() 
+        self.Adventure_Sports_Tourism = tk.Radiobutton(self,text='', value=5,variable = self.Attractions_selected,command=self.update_dropdown_state_Attractions_selected ,fg= 'green', bg = '#FFFFFF',font=('calibri',10,'bold') )
+        self.Adventure_Sports_Tourism.place(x=1130,y=320)
+        
+        
+        ###-----------------------------------------------------------------------------------------
+               
+        
+        #######Dropdown Button   - for Natural_Attractions_selected
+        tkvar_1 = tk.StringVar()  
+        self.Natural_Attractions_dropdown_selected = ttk.Combobox(self,background = "#FFFFFF",foreground= 'black', width = 14, font=('Times',14),textvariable = tkvar_1)
+         
+        # Adding combobox drop down list for month 
+        self.Natural_Attractions_dropdown_selected['values'] = ('Select option',"Waterfalls", "Beaches", "National Parks", "Mountains & Volcanoes", "Caves", "Lakes", "Deserts", "Forests", "Rivers")  
+        self.Natural_Attractions_dropdown_selected['state'] = 'readonly'
+        self.Natural_Attractions_dropdown_selected.grid(row = 4, column = 7)
+        self.Natural_Attractions_dropdown_selected.place(x=1180,y=200)         
+        self.Natural_Attractions_dropdown_selected.bind('<<ComboboxSelected>>', self.Natural_Attractions_dropdown_changed)          
+    
+    
+        #######Dropdown Button   - for Wildlife_Nature_Experiences
+        tkvar_11 = tk.StringVar()  
+        self.Wildlife_Nature_Experiences_dropdown_selected = ttk.Combobox(self,background = "#FFFFFF",foreground= 'black', width = 14, font=('Times',14),textvariable = tkvar_11)
+         
+        # Adding combobox drop down list for month 
+        self.Wildlife_Nature_Experiences_dropdown_selected['values'] = ('Select option',"Aquariums", "Safari Parks", "Botanical Gardens", "Whale Watching", "Bird Watching")  
+        self.Wildlife_Nature_Experiences_dropdown_selected['state'] = 'readonly'
+        self.Wildlife_Nature_Experiences_dropdown_selected.grid(row = 4, column = 7)
+        self.Wildlife_Nature_Experiences_dropdown_selected.place(x=1180,y=230)         
+        self.Wildlife_Nature_Experiences_dropdown_selected.bind('<<ComboboxSelected>>', self.Wildlife_Nature_Experiences_dropdown_changed)   
+    
+        
+    
+        #######Dropdown Button   - for Natural_Attractions_selected
+        tkvar_12 = tk.StringVar()  
+        self.Cultural_Historical_Attractions_dropdown_selected = ttk.Combobox(self,background = "#FFFFFF",foreground= 'black', width = 14, font=('Times',14),textvariable = tkvar_12)
+         
+        # Adding combobox drop down list for month 
+        self.Cultural_Historical_Attractions_dropdown_selected['values'] = ('Select option',"Museums", "Ancient Ruins", "Historical Sites", "Temples & Churches", "Palaces & Castles", "Cultural Festivals", "Monuments & Statues", "UNESCO World Heritage Sites")  
+        self.Cultural_Historical_Attractions_dropdown_selected['state'] = 'readonly'
+        self.Cultural_Historical_Attractions_dropdown_selected.grid(row = 4, column = 7)
+        self.Cultural_Historical_Attractions_dropdown_selected.place(x=1180,y=260)         
+        self.Cultural_Historical_Attractions_dropdown_selected.bind('<<ComboboxSelected>>', self.Cultural_Historical_Attractions_dropdown_changed)          
+    
+     
+        #######Dropdown Button   - for Natural_Attractions_selected
+        tkvar_13 = tk.StringVar()  
+        self.Urban_Modern_dropdown_selected = ttk.Combobox(self,background = "#FFFFFF",foreground= 'black', width = 14, font=('Times',14),textvariable = tkvar_13)
+         
+        # Adding combobox drop down list for month 
+        self.Urban_Modern_dropdown_selected['values'] = ('Select option',"Theme Parks", "Aquatic Parks & Water Slides", "Shopping Districts", "Skyline Views", "Public Squares", "Observation Decks", "Art Galleries", "Street Markets")  
+        self.Urban_Modern_dropdown_selected['state'] = 'readonly'
+        self.Urban_Modern_dropdown_selected.grid(row = 4, column = 7)
+        self.Urban_Modern_dropdown_selected.place(x=1180,y=290)         
+        self.Urban_Modern_dropdown_selected.bind('<<ComboboxSelected>>', self.Urban_Modern_Attractions_dropdown_changed)          
+    
+      
+        #######Dropdown Button   - for Wildlife_Nature_Experiences
+        tkvar_14 = tk.StringVar()  
+        self.Adventure_Sports_Tourism_dropdown_selected = ttk.Combobox(self,background = "#FFFFFF",foreground= 'black', width = 14, font=('Times',14),textvariable = tkvar_14)
+         
+        # Adding combobox drop down list for month 
+        self.Adventure_Sports_Tourism_dropdown_selected['values'] = ('Select option',"Aquariums", "Safari Parks", "Botanical Gardens", "Whale Watching", "Bird Watching")  
+        self.Adventure_Sports_Tourism_dropdown_selected['state'] = 'readonly'
+        self.Adventure_Sports_Tourism_dropdown_selected.grid(row = 4, column = 7)
+        self.Adventure_Sports_Tourism_dropdown_selected.place(x=1180,y=320)         
+        self.Adventure_Sports_Tourism_dropdown_selected.bind('<<ComboboxSelected>>', self.Adventure_Sports_Tourism_dropdown_changed)   
+    
+    
+            
+        self.Natural_Attractions_dropdown_selected.config(state='disabled')
+        self.Wildlife_Nature_Experiences_dropdown_selected.config(state='disabled') 
+        self.Cultural_Historical_Attractions_dropdown_selected.config(state='disabled')
+        self.Urban_Modern_dropdown_selected.config(state='disabled') 
+        self.Adventure_Sports_Tourism_dropdown_selected.config(state='disabled')  
+
+    
+    
+    
+        # "Natural Attractions": ["Waterfalls", "Beaches", "National Parks", "Mountains & Volcanoes", "Caves", "Lakes", "Deserts", "Forests", "Rivers"],
+        # "Wildlife & Nature Experiences": ["Aquariums", "Safari Parks", "Botanical Gardens", "Whale Watching", "Bird Watching"],
+        # "Cultural & Historical Attractions": ["Museums", "Ancient Ruins", "Historical Sites", "Temples & Churches", "Palaces & Castles", "Cultural Festivals", "Monuments & Statues", "UNESCO World Heritage Sites"],
+        # "Urban & Modern Attractions": ["Theme Parks", "Aquatic Parks & Water Slides", "Shopping Districts", "Skyline Views", "Public Squares", "Observation Decks", "Art Galleries", "Street Markets"],
+        # "Adventure & Sports Tourism": ["Hiking Trails", "Bungee Jumping", "Ski Resorts", "Rock Climbing", "Skydiving", "Scuba Diving", "Cycling Tours", "Ziplining"]
+                
+          
+        ###-----------------------------------------------------------------------------------------
+               
+
+        
+        
+        
+        ###-----------------------------------------------------------------------------------------
+        
+        
         
         #####RUN Automatoin  
         runWanderSphere_image = Image.open(run_Button_imgFilePath) 
@@ -598,6 +853,54 @@ class Page1(tk.Frame):
         latitude = str(self.lng_entry.get())
         longitude = str(self.lat_entry.get())
         pagecnt = int(self.v.get()) 
+        
+        
+        
+        
+        
+    
+        try:
+            Natural_Attractions_Selection = self.mainGetData_1
+        except: 
+            Natural_Attractions_Selection = 'Select option'
+    
+        try:
+            Wildlife_Nature_Selection = self.mainGetData_2
+        except: 
+            Wildlife_Nature_Selection = 'Select option'
+    
+        try:
+            Cultural_Historical_Selection = self.mainGetData_3
+        except: 
+            Cultural_Historical_Selection = 'Select option'
+    
+        try:
+            Urban_Modern_Selection = self.mainGetData_4
+        except: 
+            Urban_Modern_Selection = 'Select option'
+    
+        try:
+            Adventure_Sports_Tourism_Selection = self.mainGetData_5
+        except: 
+            Adventure_Sports_Tourism_Selection = 'Select option'
+    
+    
+        print( ' Natural_Attractions_Selection ',  Natural_Attractions_Selection )
+    
+        print( '  Wildlife_Nature_Selection',Wildlife_Nature_Selection   )
+    
+        print( '  Cultural_Historical_Selection',  Cultural_Historical_Selection )
+    
+        print( ' Urban_Modern_Selection ',  Urban_Modern_Selection )
+    
+        print( '  Adventure_Sports_Tourism_Selection', Adventure_Sports_Tourism_Selection  )
+    
+    
+        stopcodehere
+        
+        
+        
+        
         
         
         
