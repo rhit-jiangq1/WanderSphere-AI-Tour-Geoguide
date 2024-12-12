@@ -1,0 +1,83 @@
+@startuml
+
+class tkinterApp {
+    - frames: dict
+    - container: tk.Frame
+    --
+    + __init__(*args, **kwargs)
+    + show_frame(cont)
+}
+
+class StartPage {
+    --
+    + display_text(text, tag)
+    + __init__(parent, controller)
+}
+
+class Page1 {
+    .. Attributes ..
+    - domainselected_1 : tk.StringVar
+    - mainGetData_1 : list
+    - mainGetData_2 : str
+    - mainGetData_3 : str
+    - mainGetData_4 : str
+    - mainGetData_5 : str
+    - Natural_Attractions_dropdown_selected : tk.StringVar
+    - Wildlife_Nature_Experiences_dropdown_selected : tk.StringVar
+    - Cultural_Historical_Attractions_dropdown_selected : tk.StringVar
+    - Urban_Modern_dropdown_selected : tk.StringVar
+    - Adventure_Sports_Tourism_dropdown_selected : tk.StringVar
+    - text : tk.Text
+    - new_window : tk.Toplevel
+
+    .. Methods ..
+    + __init__(parent, controller)
+    + domain_changed_1(event)
+    + browsefunc_1()
+    + get_cities_by_country(country_name, file_path) : DataFrame
+    + update_city_dropdown(event, country_name, file_path, city_combobox, lat_entry, lng_entry)
+    + update_lat_lng(event, file_path, city_name, lat_entry, lng_entry)
+    + update_dropdown_state_Attractions_selected()
+    + Natural_Attractions_dropdown_changed(event)
+    + Wildlife_Nature_Experiences_dropdown_changed(event)
+    + Cultural_Historical_Attractions_dropdown_changed(event)
+    + Urban_Modern_Attractions_dropdown_changed(event)
+    + Adventure_Sports_Tourism_dropdown_changed(event)
+    + Execute_speaker_eng()
+    + display_image(image_name, image_url, google_map_link, row, col, checkbuttons)
+    + generate_itinerary(checkbuttons)
+    + display_text(text, tag)
+    + open_new_window(images_info)
+    + execute_main()
+}
+
+class Flicker_Data_Download {
+    - display_text: function
+    --
+    + __init__(display_text)
+    + get_flickr_data(api_key, secret_api_key, output_filepath, lat, lon, pagecnt)
+}
+
+class ExcelOperations {
+    --
+    + dataprocessing(top_5_images_filepath)
+    + read_flickrdata(file_path, Parent_Folder_Path)
+}
+
+tkinterApp --> tkinter.Tk : Inherits
+tkinterApp --> StartPage : Uses
+tkinterApp --> Page1 : Uses
+StartPage --> tkinter.Frame : Inherits
+Page1 --> tkinter.Tk : Inherits
+Page1 --> tkinter.Frame : Inherits
+Page1 --> tkinter.Text
+Page1 --> tkinter.Toplevel
+Page1 ..> threading.Thread
+Page1 ..> pandas.DataFrame
+Page1 ..> webbrowser.webbrowser
+Flicker_Data_Download --> tkinterApp : Uses
+Flicker_Data_Download --> flickrapi.FlickrAPI : Uses
+Flicker_Data_Download --> openpyxl.Workbook : Creates
+Flicker_Data_Download --> TextBlob : Uses
+ExcelOperations --> pd : Uses
+@enduml
