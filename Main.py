@@ -616,7 +616,7 @@ class Page1(tk.Frame):
         self.Cultural_Historical_Attractions_dropdown_selected = ttk.Combobox(self,background = "#FFFFFF",foreground= 'black', width = 14, font=('Times',14),textvariable = tkvar_12)
          
         # Adding combobox drop down list for month 
-        self.Cultural_Historical_Attractions_dropdown_selected['values'] = ('Select option',"Museums", "Ancient Ruins", "Historical Sites", "Temples & Churches", "Palaces & Castles", "Cultural Festivals", "Monuments & Statues", "UNESCO World Heritage Sites")  
+        self.Cultural_Historical_Attractions_dropdown_selected['values'] = ('Select option',"Museums", "Ancient Ruins", "Historical Sites", "Temples  Churches", "Palaces Castles", "Cultural Festivals", "Monuments & Statues", "UNESCO World Heritage Sites")  
         self.Cultural_Historical_Attractions_dropdown_selected['state'] = 'readonly'
         self.Cultural_Historical_Attractions_dropdown_selected.grid(row = 4, column = 7)
         self.Cultural_Historical_Attractions_dropdown_selected.place(x=1180,y=260)         
@@ -895,10 +895,7 @@ class Page1(tk.Frame):
     
         print( '  Adventure_Sports_Tourism_Selection', Adventure_Sports_Tourism_Selection  )
     
-    
-        stopcodehere
-        
-        
+     
         
         
         
